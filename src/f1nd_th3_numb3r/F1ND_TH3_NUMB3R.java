@@ -31,12 +31,14 @@ public class F1ND_TH3_NUMB3R {
 				"El juego finaliza cuando aciertas a todas las cifras en su respectiva posición, es decir, cuando obtienes 'XXXX'\n\n                                          ~ Good Luck! ~\n");
 	}
 
-	public static void inicioJuego() {// metodo principal inicializar juego
+	public static void inicioJuego() {
+		// metodo principal inicializar juego
 		int generado[] = new int[4];
 		generarNum(generado);
 	}
 
-	public static void generarNum(int[] numero) {// generacion numero aleatorio
+	public static void generarNum(int[] numero) {
+		// generacion numero aleatorio
 		Random rnd = new Random();
 		for (int i = 0; i < numero.length; i++) {
 			numero[i] = rnd.nextInt(10);
@@ -51,9 +53,8 @@ public class F1ND_TH3_NUMB3R {
 		}
 	}
 
-	public static int[] num_a_vector(String numero) {// convierte numero jugado
-														// a un vector para
-														// comparar facilmente
+	public static int[] num_a_vector(String numero) {
+		// convierte numero jugado a un vector para comparar facilmente
 		int vectorNum[] = new int[numero.length()];
 		for (int i = 0; i < numero.length(); i++) {
 			vectorNum[i] = Integer.parseInt(String.valueOf(numero.charAt(i)));
@@ -61,8 +62,8 @@ public class F1ND_TH3_NUMB3R {
 		return vectorNum;
 	}
 
-	public static void compararNumero(int[] numGenerado, int jugada) {// muestra
-																		// X e Y
+	public static void compararNumero(int[] numGenerado, int jugada) {
+		// muestra X e Y
 		String juego = String.valueOf(jugada);
 		int numJugado[] = num_a_vector(juego);
 		String toque = cantidadToque(numGenerado, numJugado);
@@ -70,8 +71,8 @@ public class F1ND_TH3_NUMB3R {
 		System.out.println(toque + fama);
 	}
 
-	public static String cantidadToque(int[] generado, int[] jugada) {// cuenta
-																		// los Y
+	public static String cantidadToque(int[] generado, int[] jugada) {
+		// cuenta los Y
 		String toque = "";
 		for (int i = 0; i < jugada.length; i++) {
 			for (int j = 0; j < jugada.length; i++) {
@@ -83,8 +84,8 @@ public class F1ND_TH3_NUMB3R {
 		return toque;
 	}
 
-	public static String cantidadFama(int[] generado, int[] jugada) {// cuenta
-																		// los X
+	public static String cantidadFama(int[] generado, int[] jugada) {
+		// cuenta los X
 		String fama = "";
 		for (int i = 0; i < jugada.length; i++) {
 			for (int j = 0; j < jugada.length; i++) {
