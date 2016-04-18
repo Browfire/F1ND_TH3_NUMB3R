@@ -18,5 +18,8 @@ public class F1ND_TH3_NUMB3R {
         System.out.println("\nLas pistas son las siguientes:\n==> Cuando aparezca una 'Y' en pantalla, significará que acertaste a una de las cifras del número.\n==> Cuando aparezca una 'X' en pantalla, significará que acertaste a la posición de una cifra del número.\n");
         System.out.println("El juego finaliza cuando aciertas a todas las cifras en su respectiva posición, es decir, cuando obtienes 'XXXX'\n\n                                          ~ Good Luck! ~\n");
     }
+    public static void prueba(){
+        System.out.println("Hola Mundo");
+    }
     
 }
