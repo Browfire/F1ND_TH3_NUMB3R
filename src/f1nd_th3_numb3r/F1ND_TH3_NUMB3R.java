@@ -1,11 +1,14 @@
 package f1nd_th3_numb3r;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class F1ND_TH3_NUMB3R {
 	public static void main(String[] args) {
 		menuPrincipal();
 		instrucciones();
+		inicioJuego();
+	
 	}
 
 	public static void menuPrincipal() {
@@ -35,6 +38,21 @@ public class F1ND_TH3_NUMB3R {
 		// metodo principal inicializar juego
 		int generado[] = new int[4];
 		generarNum(generado);
+		//Date inicio=tomarTiempoJuego();
+		juego(generado);
+		//System.out.println("Has terminado!");
+		//Date fin=tomarTiempoJuego();
+		
+	}
+	public static void juego(int[] numGenerado){
+		int jugada;
+		Scanner leer = new Scanner(System.in);
+		System.out.print("Ingrese numero: ");
+		jugada = leer.nextInt();
+		// validarJugada(jugada);
+		compararNumero(numGenerado,jugada); 
+		
+
 	}
 
 	public static void generarNum(int[] numero) {
@@ -75,8 +93,8 @@ public class F1ND_TH3_NUMB3R {
 		// cuenta los Y
 		String toque = "";
 		for (int i = 0; i < jugada.length; i++) {
-			for (int j = 0; j < jugada.length; i++) {
-				if ((jugada[i] == generado[j]) && i != j) {
+			for (int j = 0; j < jugada.length; j++) {
+				if ((jugada[i] == generado[j]) && (i != j)) {
 					toque += "Y";
 				}
 			}
@@ -88,12 +106,17 @@ public class F1ND_TH3_NUMB3R {
 		// cuenta los X
 		String fama = "";
 		for (int i = 0; i < jugada.length; i++) {
-			for (int j = 0; j < jugada.length; i++) {
-				if ((jugada[i] == generado[j]) && i == j) {
+			for (int j = 0; j < jugada.length; j++) {
+				if ((jugada[i] == generado[j]) && (i == j)) {
 					fama += "X";
 				}
 			}
 		}
 		return fama;
+	}
+	public static Date tomarTiempoJuego(){
+		SimpleDateFormat sdf= new SimpleDateFormat("mm:ss");
+		return new Date();
+		
 	}
 }
