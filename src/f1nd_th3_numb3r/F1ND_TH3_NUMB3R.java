@@ -5,8 +5,10 @@ import java.util.*;
 
 public class F1ND_TH3_NUMB3R {
 	public static void main(String[] args) {
-		menuPrincipal();
-		inicioJuego();
+               mostrarMenu();
+               
+		
+		
 	}
 
 	// Muestra por pantalla el menu principal del juego.
@@ -138,4 +140,56 @@ public class F1ND_TH3_NUMB3R {
 		long tiempo = fin.getTime() - inicio.getTime();
 		return sdf.format(tiempo);
 	}
+        
+        //Lee y retorna número ingresado por el usuario
+        public static int leerNumero() {
+            Scanner leer = new Scanner(System.in);
+            int num = leer.nextInt();
+            return num;
+        }
+        
+        //Usa método TryCatch en el método leerNumero() para validar entrada de números
+        public static int tryCatch() {
+            int resp=0;
+            boolean salir;            
+            do {
+                salir = false;
+                try {
+                    resp = leerNumero();
+                }catch(Exception ex) {
+                    salir = true;
+                }               
+            } while (salir);
+            return resp;
+        }
+        
+        //Valida opción menú entre: 1<= opc <= 4
+        public static int validarMenu() {
+            int opc;
+            do {
+                opc = tryCatch();
+            } while (opc<1 || opc>4);
+            return opc;
+        }
+        
+        //Método selección múltiple menuPrincipal
+        public static void switchCase() {
+            switch (validarMenu()) {
+                case 1: inicioJuego();
+                        break;
+            //  case 2: highScore();
+            //          break;
+                case 3: instrucciones();
+                        break;
+            //  case 4: salir();
+            //          break;
+                default: break;
+            }
+        }
+        //Muestra por pantalla menú principal
+        public static void mostrarMenu() {
+            do {
+                menuPrincipal();
+            }while (validarMenu() != 4);
+        }
 }
