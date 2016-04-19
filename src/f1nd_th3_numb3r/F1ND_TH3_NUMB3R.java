@@ -66,7 +66,7 @@ public class F1ND_TH3_NUMB3R {
 	}
 
 	// Verifica si las cifras del numero aleatorio generado se repiten, si es
-	// así genera un nuevo numero
+	// asï¿½ genera un nuevo numero
 	public static int[] repeticionNumGen(int[] numGenerado, int i) {
 		Random rnd = new Random();
 		if (i > 0) {
@@ -138,4 +138,7 @@ public class F1ND_TH3_NUMB3R {
 		long tiempo = fin.getTime() - inicio.getTime();
 		return sdf.format(tiempo);
 	}
+        public static void basura() {
+            System.out.println("Hola");
+        }
 }
