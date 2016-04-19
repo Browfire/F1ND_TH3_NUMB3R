@@ -172,7 +172,7 @@ public class F1ND_TH3_NUMB3R {
             return opc;
         }
         
-        //Método selección múltiple menuPrincipal
+        //Método selección múltiple menuPrincipal()
         public static void switchCase() {
             switch (validarMenu()) {
                 case 1: inicioJuego();
@@ -181,8 +181,6 @@ public class F1ND_TH3_NUMB3R {
             //          break;
                 case 3: instrucciones();
                         break;
-            //  case 4: salir();
-            //          break;
                 default: break;
             }
         }
