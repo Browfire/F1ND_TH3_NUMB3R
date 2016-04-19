@@ -138,7 +138,4 @@ public class F1ND_TH3_NUMB3R {
 		long tiempo = fin.getTime() - inicio.getTime();
 		return sdf.format(tiempo);
 	}
-        public static void basura() {
-            System.out.println("Hola");
-        }
 }
