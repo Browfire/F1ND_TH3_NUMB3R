@@ -5,8 +5,8 @@ import java.util.*;
 
 public class F1ND_TH3_NUMB3R {
 	public static void main(String[] args) {
-               mostrarMenu();
-               
+               menuPrincipal();
+               inicioJuego();
 		
 		
 	}
@@ -54,7 +54,7 @@ public class F1ND_TH3_NUMB3R {
 		Scanner leer = new Scanner(System.in);
 		System.out.print("Ingrese numero: ");
 		jugada = leer.nextLine();
-		// validarJugada(jugada);
+		validarJugada(jugada);
 		compararNumero(numGenerado, jugada);
 	}
 
@@ -184,10 +184,18 @@ public class F1ND_TH3_NUMB3R {
                 default: break;
             }
         }
-        //Muestra por pantalla menú principal
-        public static void mostrarMenu() {
-            do {
-                menuPrincipal();
-            }while (validarMenu() != 4);
-        }
+               
+        //Validar no repetición de números ingresados por el jugador
+        public static String validarJugada(String numero) {
+        
+            String repite = "Se repite";
+            for (int i = 0; i < numero.length(); i++) {
+                for (int j =0; j < numero.length(); j++) {
+                        if (numero.charAt(i) == numero.charAt(j) && (i != j)) {
+                            return repite;
+                        }
+                }
+            }
+            return numero;
+    }
 }
