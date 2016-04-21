@@ -5,8 +5,10 @@ import java.util.*;
 
 public class F1ND_TH3_NUMB3R {
 	public static void main(String[] args) {
-		menuPrincipal();
-		inicioJuego();
+               menuPrincipal();
+               inicioJuego();
+		
+		
 	}
 
 	// Muestra por pantalla el menu principal del juego.
@@ -52,7 +54,7 @@ public class F1ND_TH3_NUMB3R {
 		Scanner leer = new Scanner(System.in);
 		System.out.print("Ingrese numero: ");
 		jugada = leer.nextLine();
-		// validarJugada(jugada);
+		validarJugada(jugada);
 		compararNumero(numGenerado, jugada);
 	}
 
@@ -66,7 +68,7 @@ public class F1ND_TH3_NUMB3R {
 	}
 
 	// Verifica si las cifras del numero aleatorio generado se repiten, si es
-	// as� genera un nuevo numero
+	// as� genera un nuevo numero
 	public static int[] repeticionNumGen(int[] numGenerado, int i) {
 		Random rnd = new Random();
 		if (i > 0) {
@@ -138,4 +140,62 @@ public class F1ND_TH3_NUMB3R {
 		long tiempo = fin.getTime() - inicio.getTime();
 		return sdf.format(tiempo);
 	}
+        
+        //Lee y retorna número ingresado por el usuario
+        public static int leerNumero() {
+            Scanner leer = new Scanner(System.in);
+            int num = leer.nextInt();
+            return num;
+        }
+        
+        //Usa método TryCatch en el método leerNumero() para validar entrada de números
+        public static int tryCatch() {
+            int resp=0;
+            boolean salir;            
+            do {
+                salir = false;
+                try {
+                    resp = leerNumero();
+                }catch(Exception ex) {
+                    salir = true;
+                }               
+            } while (salir);
+            return resp;
+        }
+        
+        //Valida opción menú entre: 1<= opc <= 4
+        public static int validarMenu() {
+            int opc;
+            do {
+                opc = tryCatch();
+            } while (opc<1 || opc>4);
+            return opc;
+        }
+        
+        //Método selección múltiple menuPrincipal()
+        public static void switchCase() {
+            switch (validarMenu()) {
+                case 1: inicioJuego();
+                        break;
+            //  case 2: highScore();
+            //          break;
+                case 3: instrucciones();
+                        break;
+                default: break;
+            }
+        }
+               
+        //Validar no repetición de números ingresados por el jugador
+        public static String validarJugada(String numero) {
+        
+            String repite = "Se repite";
+            for (int i = 0; i < numero.length(); i++) {
+                for (int j =0; j < numero.length(); j++) {
+                        if (numero.charAt(i) == numero.charAt(j) && (i != j)) {
+                            return repite;
+                        }
+                }
+            }
+            return numero;
+    }
 }
