@@ -100,10 +100,13 @@ public class F1ND_TH3_NUMB3R {
     // Inicializa el juego.
     public static void inicioJuego() {
         int generado[] = new int[4];
+        boolean finjuego;
         generarNum(generado);
-        // for(int i=0;i<4;i++) System.out.println(generado[i]);
+        //for(int i=0;i<4;i++) System.out.println(generado[i]);
         Date inicio = tomarTiempoJuego();
-        leerJugada(generado);
+        do{
+        	finjuego=leerJugada(generado);
+        }while(finjuego);
         // System.out.println("Has terminado!");
         Date fin = tomarTiempoJuego();
     }
@@ -134,26 +137,44 @@ public class F1ND_TH3_NUMB3R {
 
     // Lee la jugada del usuario, llama a metodo que valida la jugada y metodo
     // que compara la jugada con el numero generado.
-    public static void leerJugada(int[] numGenerado) {
+    public static boolean leerJugada(int[] numGenerado) {
         String jugada;
-        Scanner leer = new Scanner(System.in);
-        System.out.print("Ingrese numero: ");
-        jugada = leer.nextLine();
-        validarJugada(jugada);
-        compararNumero(numGenerado, jugada);
+        String resultado;
+        do{
+        	jugada=ingresoJugada();  
+        }while(validarLongitud(numGenerado, jugada) || validarRepeticion(jugada) );
+        resultado=compararNumero(numGenerado, jugada);
+        if (resultado.equals("XXXX")){
+        	return false;
+        }
+        return true;
     }
-             
+    //Leer cadena ingresada por el usuario
+    public static String ingresoJugada(){
+    	Scanner leer=new Scanner(System.in);
+    	System.out.print("Ingrese numero: ");
+    	return leer.nextLine();
+    }
+    //valida la longitud de la jugada para que sea igual al largo del numero generado
+    public static boolean validarLongitud(int []numGenerado, String jugada){
+    	if(numGenerado.length!=jugada.length()){
+    		System.out.println("Ingrese cantidad correcta de digitos");
+    		return true;
+    	}
+    	return false;
+    }
     //Validar la no repetición de números ingresados por el jugador
-    public static String validarJugada(String numero) {
-        String repite = "Se repite";
+    public static boolean validarRepeticion(String numero) {
+        String repite = "Los numeros se repiten, ingreselos nuevamente";
         for (int i = 0; i < numero.length(); i++) {
             for (int j =0; j < numero.length(); j++) {
                 if (numero.charAt(i) == numero.charAt(j) && (i != j)) {
-                   return repite;
+                	System.out.println(repite);
+                	return true;
                 }
             }
         }
-        return numero;
+        return false;
     }
     
     // Convierte la jugada en arreglo, y llama a metodos que evaluan cantidad
