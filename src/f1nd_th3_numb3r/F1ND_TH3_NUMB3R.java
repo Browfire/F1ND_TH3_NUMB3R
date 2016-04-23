@@ -139,12 +139,12 @@ public class F1ND_TH3_NUMB3R {
         Scanner leer = new Scanner(System.in);
         System.out.print("Ingrese numero: ");
         jugada = leer.nextLine();
-        validarJugada(jugada);
+        validarRepeticion(jugada);
         compararNumero(numGenerado, jugada);
     }
              
     //Validar la no repetición de números ingresados por el jugador
-    public static String validarJugada(String numero) {
+    public static String validarRepeticion(String numero) {
         String repite = "Se repite";
         for (int i = 0; i < numero.length(); i++) {
             for (int j =0; j < numero.length(); j++) {
