@@ -142,18 +142,24 @@ public class F1ND_TH3_NUMB3R {
         validarRepeticion(jugada);
         compararNumero(numGenerado, jugada);
     }
-             
+    public static boolean validarLongitud(int []numGenerado, String jugada){
+    	if(numGenerado.length!=jugada.length()){
+    		return false;
+    	}
+    	return true;
+    }
     //Validar la no repetición de números ingresados por el jugador
-    public static String validarRepeticion(String numero) {
-        String repite = "Se repite";
+    public static boolean validarRepeticion(String numero) {
+        String repite = "Se repiten los numeros, ingreselos nuevamente";
         for (int i = 0; i < numero.length(); i++) {
             for (int j =0; j < numero.length(); j++) {
                 if (numero.charAt(i) == numero.charAt(j) && (i != j)) {
-                   return repite;
+                	System.out.println(repite);
+                	return false;
                 }
             }
         }
-        return numero;
+        return true;
     }
     
     // Convierte la jugada en arreglo, y llama a metodos que evaluan cantidad
