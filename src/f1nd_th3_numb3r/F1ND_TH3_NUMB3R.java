@@ -100,15 +100,17 @@ public class F1ND_TH3_NUMB3R {
     // Inicializa el juego.
     public static void inicioJuego() {
         int generado[] = new int[4];
-        boolean finjuego;
+        boolean continuar;
+        int contJugadas = 0;
         generarNum(generado);
         //for(int i=0;i<4;i++) System.out.println(generado[i]);
         Date inicio = tomarTiempoJuego();
         do{
-        	finjuego=leerJugada(generado);
-        }while(finjuego);
-        // System.out.println("Has terminado!");
+            continuar=leerJugada(generado);
+            contJugadas++;
+        }while(continuar);
         Date fin = tomarTiempoJuego();
+        mostrarFinJuego(contJugadas, inicio, fin);
     }
 
     // Genera un numero aleatorio de n cifras
@@ -135,44 +137,62 @@ public class F1ND_TH3_NUMB3R {
         return numGenerado;
     }
 
-    // Lee la jugada del usuario, llama a metodo que valida la jugada y metodo
-    // que compara la jugada con el numero generado.
+    // Lee la jugada del usuario, llama a metodo que valida la jugada, método
+    // que compara la jugada con el numero generado y que valida el sólo ingreso de enteros.
     public static boolean leerJugada(int[] numGenerado) {
         String jugada;
         String resultado;
         do{
         	jugada=ingresoJugada();  
-        }while(validarLongitud(numGenerado, jugada) || validarRepeticion(jugada) );
+        }while(validarLongitud(numGenerado, jugada) || validarRepeticion(jugada) || validarInt(jugada) );
         resultado=compararNumero(numGenerado, jugada);
         if (resultado.equals("XXXX")){
         	return false;
         }
         return true;
     }
-    //Leer cadena ingresada por el usuario
+    
+    // Lee la cadena ingresada por el usuario.
     public static String ingresoJugada(){
     	Scanner leer=new Scanner(System.in);
     	System.out.print("Ingrese numero: ");
     	return leer.nextLine();
     }
-    //valida la longitud de la jugada para que sea igual al largo del numero generado
+    
+    // Valida la longitud de la jugada para que sea igual al largo del numero generado.
     public static boolean validarLongitud(int []numGenerado, String jugada){
-    	if(numGenerado.length!=jugada.length()){
-    		System.out.println("Ingrese cantidad correcta de digitos");
+    	if (numGenerado.length!=jugada.length()){
+    		System.err.println("Ingrese cantidad correcta de digitos");
     		return true;
     	}
     	return false;
     }
-    //Validar la no repetición de números ingresados por el jugador
-    public static boolean validarRepeticion(String numero) {
-        String repite = "Los numeros se repiten, ingreselos nuevamente";
-        for (int i = 0; i < numero.length(); i++) {
-            for (int j =0; j < numero.length(); j++) {
-                if (numero.charAt(i) == numero.charAt(j) && (i != j)) {
-                	System.out.println(repite);
+    
+    // Valida la no repetición de números ingresados por el jugador.
+    public static boolean validarRepeticion(String jugada) {
+        for (int i = 0; i < jugada.length(); i++) {
+            for (int j =0; j < jugada.length(); j++) {
+                if (jugada.charAt(i) == jugada.charAt(j) && (i != j)) {
+                	System.err.println("Los numeros se repiten, ingreselos nuevamente");
                 	return true;
                 }
             }
+        }
+        return false;
+    }
+    
+    // Valida el sólo ingreso de números a la jugada.
+    public static boolean validarInt(String jugada) {
+        if (jugada.charAt(0) != '+' && jugada.charAt(0) != '-') {
+            try {
+                Integer.parseInt(jugada);
+            }catch(NumberFormatException er) {
+                System.err.println("Ingrese sólo números");
+                return true;
+            }
+        }else{
+            System.err.println("Ingrese sólo números");
+            return true;
         }
         return false;
     }
@@ -236,15 +256,34 @@ public class F1ND_TH3_NUMB3R {
         return sdf.format(tiempo);
     }
     
-    public static void volverMenu(){
+    // Da la opción al usuario, de volver al menú principal.
+    public static void volverMenu() {
         System.out.print("\nIngrese cualquier tecla y presione enter para volver al menú principal. -> ");
         leerCualquierTecla();
     }
     
-    public static char leerCualquierTecla(){
+    // Básicamente se usa este método para confirmar el regreso al menú principal.
+    public static char leerCualquierTecla() {
         char input;
         Scanner read = new Scanner(System.in);
         input = read.next().charAt(0);
         return input;
+    }
+    
+    // Método que calcula el puntaje al finalizar el juego.
+    public static int calcularPuntaje(int jugadas, String tiempo){
+        int minutos = Integer.parseInt(String.valueOf(tiempo.charAt(0))) + Integer.parseInt(String.valueOf(tiempo.charAt(1)));
+        int segundos = Integer.parseInt(String.valueOf(tiempo.charAt(3))) + Integer.parseInt(String.valueOf(tiempo.charAt(4)));
+        int puntaje = 927249 -(21124*(jugadas)+(77*(minutos)+(segundos))*1225); // <-- Fórmula que calcula el puntaje.
+        return puntaje;
+    }
+    
+    // Muestra detalles al finalizar el juego.
+    public static void mostrarFinJuego(int jugadas, Date inicio, Date fin) {
+        String tiempo = tiempoTotal(inicio, fin);
+        System.out.println("\n¡¡Felicidades, has encontrado el número oculto!!\n");
+        System.out.println("==> Cantitad total de intentos: "+jugadas);
+        System.out.println("==> Tiempo total transcurrido: "+tiempo);
+        System.out.println("==> Tu puntaje obtenido es: "+calcularPuntaje(jugadas, tiempo));
     }
 }
