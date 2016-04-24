@@ -146,10 +146,8 @@ public class F1ND_TH3_NUMB3R {
         	jugada=ingresoJugada();  
         }while(validarLongitud(numGenerado, jugada) || validarRepeticion(jugada) || validarInt(jugada) );
         resultado=compararNumero(numGenerado, jugada);
-        if (resultado.equals("XXXX")){
-        	return false;
-        }
-        return true;
+        System.out.println(resultado);
+        return !resultado.equals("XXXX");
     }
     
     // Lee la cadena ingresada por el usuario.
@@ -274,7 +272,7 @@ public class F1ND_TH3_NUMB3R {
     public static int calcularPuntaje(int jugadas, String tiempo){
         int minutos = Integer.parseInt(String.valueOf(tiempo.charAt(0))) + Integer.parseInt(String.valueOf(tiempo.charAt(1)));
         int segundos = Integer.parseInt(String.valueOf(tiempo.charAt(3))) + Integer.parseInt(String.valueOf(tiempo.charAt(4)));
-        int puntaje = 927249 -(21124*(jugadas)+(77*(minutos)+(segundos))*1225); // <-- Fórmula que calcula el puntaje.
+        int puntaje = 939070 - (12345*(jugadas)+(62*(minutos)+(segundos))*719); // <-- Fórmula que calcula el puntaje.
         return puntaje;
     }
     
