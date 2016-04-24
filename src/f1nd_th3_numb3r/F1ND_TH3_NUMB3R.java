@@ -103,7 +103,7 @@ public class F1ND_TH3_NUMB3R {
         boolean continuar;
         int contJugadas = 0;
         generarNum(generado);
-        for(int i=0;i<4;i++) System.out.println(generado[i]);
+        //for(int i=0;i<4;i++) System.out.println(generado[i]);
         Date inicio = tomarTiempoJuego();
         do{
             continuar=leerJugada(generado);
